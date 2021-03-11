@@ -29,10 +29,14 @@
     "background_color": "white",
     "theme_color": "white",
     "share_target": {
-        "action": "./index.html",
+        "url_template": "index.html?title={title}&text={text}&url={url}&videolink={videolink}",
+        "action": "index.html",
         "method": "GET",
         "params": {
-            "videolink": "videolink"
+            "videolink": "videolink",
+            "title": "title",
+            "text": "text",
+            "url": "url"
         }
     } 
 }

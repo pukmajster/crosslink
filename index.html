@@ -17,7 +17,7 @@
     </head>
 
     <body>
-        <div>
+        <div id="thing" >
             This is a PWA. Very najs!
         </div>
 
@@ -39,6 +39,8 @@
                 if(!videolink) return;
 
                 window.alert(videolink);
+
+                document.getElementById('thing').innerHTML = videolink;
             })
         </script>
     </body>

@@ -27,6 +27,10 @@
             This is a PWA. Very najs!
         </div>
 
+        <input id="ip" value="localhost:3000" />
+
+        <button onclick="sendRequest()" >Send request</button>
+
         <script>
             'use strict';
 
@@ -37,22 +41,35 @@
                 }
             }
 
+            async function sendRequest() {
+                const parsedUrl = new URL(window.location.toString());
+                const ip = document.getElementById('ip').value;
+                const title = parsedUrl.searchParams.get('title');
+                const url = parsedUrl.searchParams.get('text');
+
+                const reqUrl = `http://${ip}/open-link-on-pc?title=${title}&url=${url}`;
+
+                console.log(reqUrl);
+
+
+                try {
+                    let req = await fetch(reqUrl, {
+                        mode: 'no-cors'
+                    });
+
+                }
+                catch (e) {
+                    console.log(e);
+                }
+
+
+            }
+
             window.addEventListener('DOMContentLoaded', () => {
                 const parsedUrl = new URL(window.location.toString());
-                // searchParams.get() will properly handle decoding the values.
-                // console.log('Title shared: ' + parsedUrl.searchParams.get('title'));
-                // console.log('Text shared: ' + parsedUrl.searchParams.get('text'));
-                // console.log('URL shared: ' + parsedUrl.searchParams.get('url'));
-                // console.log('videolink shared: ' + parsedUrl.searchParams.get('videolink'));
-
                 document.getElementById('thing').innerHTML = `
                     <p>title: ${parsedUrl.searchParams.get('title')}</p>
-                    <p>text: ${parsedUrl.searchParams.get('text')}</p>
-                    <p>url: ${parsedUrl.searchParams.get('url')}</p>
-                    <p>videolink: ${parsedUrl.searchParams.get('videolink')}</p>
-
-                    <br />
-                    <p>${window.location.toString()}</p>
+                    <p>url: ${parsedUrl.searchParams.get('text')}</p>
                 `;
             });
 

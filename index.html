@@ -2,7 +2,7 @@
 <html lang="en">
     <head>
         <meta charset="utf-8">
-        <title>Crosslink</title>
+        <title>YT Crosslink</title>
 
         <link rel="manifest" href="manifest.json">
         <link rel="stylesheet" href="css/style.css">
@@ -14,7 +14,7 @@
 
         <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"> 
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="theme-color" content="#35a5e6" />
+        <meta name="theme-color" content="#f50303" />
         <meta name="apple-mobile-web-app-capable" content="yes">
         <meta name="apple-mobile-web-app-status-bar-style" content="black">
         <meta name="apple-mobile-web-app-title" content="Hello World">
@@ -31,8 +31,10 @@
                 font-family: 'Roboto', sans-serif;
                 font-size: 21px;
 
-                --theme: #35a5e6;
-                --themeTranslucent: #35a5e67a;
+                --theme: #f50303;
+                --themeTranslucent: #f503037a;
+                --bg: #242424;
+                --bgActive: #333333;
             }
 
             header {
@@ -54,13 +56,17 @@
 
             section {
                 display: flex;
+                margin: 0 auto;
                 flex-direction: column;
-                margin: 2em 1em 0 1em;
+                padding: 2em 1em 0 1em;
                 max-width: 600px;
             }
 
             body {
                 font-size: 21px;
+                
+                background-color: #242424;
+                color: white;
             }
 
             a {
@@ -76,7 +82,8 @@
                 width: 100%;
 
                 padding: 15px;
-                background-color: rgba(0,0,0,0.1);
+                background-color: rgb(122, 122, 122, .1);
+                color: white;
                 border-radius: 5px;
             }
 
@@ -93,18 +100,39 @@
                 font-size: .7rem;
 
                 padding: 15px;
-                background-color: rgba(0,0,0,0.1);
+                background-color: rgb(122, 122, 122, .1);
+                color: white;
                 border-radius: 5px;
             }
 
             input:hover,
             button:hover {
-                box-shadow: 0 0 0 3px var(--themeTranslucent);
+                box-shadow: 0 0 0 2px var(--themeTranslucent);
+                background-color: var(--bgActive);
             }
 
             input:focus,
             button:focus {
-                box-shadow: 0 0 0 3px var(--theme);
+                box-shadow: 0 0 0 2px var(--theme);
+            }
+
+            footer {
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                right: 0;
+
+                padding: 9px;
+                padding-bottom: 12px;
+
+                font-size: .7rem;
+                text-align: center;
+
+                background-color: var(--bg);
+            }
+
+            footer a {
+                color: var(--theme);
             }
 
         </style>
@@ -113,11 +141,11 @@
     <body>
 
         <header>
-            <h3>Crosslink</h3>
+            <h3>YT Crosslink</h3>
         </header>
 
         <section id="root">
-            <h4>Setup</h4>
+            <h4>Configuration</h4>
             <p>Below you must enter the IPv4 of the device on which your Crosslink API is running on.
             On windows, you can find that IP by typing "ipconfig" into the command prompt. </p>
 
@@ -132,10 +160,15 @@
             <button onclick="saveIp()" >Save IP</button>
 
             <p id="alert" ></p>
+
+            <footer>Made by <a href="https://github.com/pukmajster" >@pukmajster</a></footer>
         </section>
 
         <script>
             'use strict';
+
+            let app = 'yt-crosslink-pwa';
+            let ipLocalKey = `${app}-ip`;
 
             let counter = 0;
 
@@ -145,21 +178,22 @@
                     navigator.serviceWorker.register('service-worker.js');
                 }
 
-                let ip = localStorage.getItem('crosslink-pwa-ip');
+                let ip = localStorage.getItem(ipLocalKey);
                 if(ip) {
                     document.getElementById('ip').value = ip;
                 }
             }
 
             async function sendRequest() {
-                let ip = localStorage.getItem('crosslink-pwa-ip');
+                let ip = localStorage.getItem(ipLocalKey);
                 if(!ip) {
+                    setAlert('ERROR: Missing IP!')
                     return;
                 }
 
                 const parsedUrl = new URL(window.location.toString());
                 const title = parsedUrl.searchParams.get('title');
-                const url = parsedUrl.searchParams.get('url') ?? parsedUrl.searchParams.get('text');
+                const url = parsedUrl.searchParams.get('text');
 
                 const reqUrl = `http://${ip}/open-link-on-pc?title=${title}&url=${url}`;
 
@@ -170,7 +204,7 @@
             }
 
             function saveIp() {
-                localStorage.setItem('crosslink-pwa-ip', document.getElementById('ip').value);
+                localStorage.setItem(ipLocalKey, document.getElementById('ip').value);
                 setAlert('Saved!');
             }
 

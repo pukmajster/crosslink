@@ -1,6 +1,7 @@
 {
-    "name": "Crosslink",
-    "short_name": "Crosslink",
+    "name": "YT Crosslink",
+    "short_name": "YT Crosslink",
+    "description": "Quickly forward the video you're watching from your phone to your PC.",
     "icons": [
       {
           "src": "media/icons/icon-192x192.png",
@@ -26,16 +27,15 @@
     "lang": "en-US",
     "start_url": "./index.html",
     "display": "standalone",
-    "background_color": "white",
-    "theme_color": "#35a5e6",
+    "background_color": "#242424",
+    "theme_color": "#f50303",
     "share_target": {
-        "url_template": "index.html?title={title}&text={text}&url={url}",
+        "url_template": "index.html?title={title}&text={text}",
         "action": "index.html",
         "method": "GET",
         "params": {
             "title": "title",
-            "text": "text",
-            "url": "url"
+            "text": "text"
         }
     } 
 }

@@ -9,7 +9,7 @@
         <link rel="icon" href="favicon.ico" type="image/x-icon" />
         <link rel="apple-touch-icon" href="images/icons/icon-192x192.png">
 
-        <!-- <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">  -->
+        <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"> 
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="theme-color" content="white" />
         <meta name="apple-mobile-web-app-capable" content="yes">
@@ -20,10 +20,6 @@
             body {
                 font-size: 21px;
             }
-
-            iframe {
-                /* display: none; */
-            }
         </style>
     </head>
 
@@ -31,16 +27,12 @@
         <h3>Crosslink 7</h3>
         <p id="query" ></p>
 
-        <input id="ip" value="http://192.168.0.104:3000" />
+        <input id="ip" value="https://192.168.0.104:3000" />
         <button onclick="sendRequest()" >Send request</button>
         
         <p id="ipReq" ></p>
         <p id="XMLHttp" ></p>
         <p id="error" ></p>
-
-        <div id="iframe_root" >
-            <iframe name="anchor_iframe"  id="anchor_iframe" ></iframe>
-        </div>
 
         <script>
             'use strict';
@@ -54,7 +46,7 @@
                 }
             }
 
-            function sendRequest() {
+            async function sendRequest() {
                 const parsedUrl = new URL(window.location.toString());
                 const ip = document.getElementById('ip').value;
                 const title = parsedUrl.searchParams.get('title');
@@ -64,37 +56,20 @@
 
                 document.getElementById('ipReq').innerHTML = reqUrl;
 
-                let iframe = document.getElementById('anchor_iframe');
+                try {
+                    // let a = document.createElement('a');
+                    // a.href = reqUrl;
+                    // a.target= '_blank';
+                    // document.body.appendChild(a);
+                    // a.click();
 
-                
-                let html = `
-                    <a id="iframe_a" href="${reqUrl}" >wd</a>
-               
-                `
-                let html2 = `
-                    <a id="iframe_a" href="${reqUrl}" >wd</a>
-                    <script>
-                        document.getElementById('iframe_a').click();
-                    <\/script>
-                `
-                iframe.src = "data:text/html;charset=utf-8," + (html);
-
-                // try {
-                //     // let a = document.createElement('a');
-                //     // a.href = reqUrl;
-                //     // a.target= '_blank';
-                //     // document.body.appendChild(a);
-                //     // a.click();
-
-                    
-
-                //     // await fetch(reqUrl)
-                // }
-                // catch (e) {
-                //     console.log(e);
-                //     counter++;
-                //     document.getElementById('error').innerHTML = `Error #${counter}: <br/> ${e}`;
-                // }
+                    await fetch(reqUrl)
+                }
+                catch (e) {
+                    console.log(e);
+                    counter++;
+                    document.getElementById('error').innerHTML = `Error #${counter}: <br/> ${e}`;
+                }
             }
 
             window.addEventListener('DOMContentLoaded', () => {

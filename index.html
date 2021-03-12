@@ -23,16 +23,18 @@
     </head>
 
     <body>
-        <div id="thing" >
-            This is a PWA. Very najs!
-        </div>
+        <h3>Crosslink</h3>
+        <p id="query" ></p>
 
         <input id="ip" value="localhost:3000" />
-
         <button onclick="sendRequest()" >Send request</button>
+
+        <p id="error" ></p>
 
         <script>
             'use strict';
+
+            let counter = 0;
 
             window.onload = () => {
 
@@ -56,10 +58,11 @@
                     let req = await fetch(reqUrl, {
                         mode: 'no-cors'
                     });
-
                 }
                 catch (e) {
                     console.log(e);
+                    counter++;
+                    document.getElementById('error').innerHTML = `Error #${counter}: <br/> ${e}`;
                 }
 
 
@@ -67,24 +70,11 @@
 
             window.addEventListener('DOMContentLoaded', () => {
                 const parsedUrl = new URL(window.location.toString());
-                document.getElementById('thing').innerHTML = `
+                document.getElementById('query').innerHTML = `
                     <p>title: ${parsedUrl.searchParams.get('title')}</p>
                     <p>url: ${parsedUrl.searchParams.get('text')}</p>
                 `;
             });
-
-            // window.addEventListener('load', () => {
-            //     if(!window.location.search) return;
-
-            //     const params = new URLSearchParams(window.location.search);
-            //     const videolink = params.get('videolink');
-
-            //     if(!videolink) return;
-
-            //     window.alert(videolink);
-
-            //     document.getElementById('thing').innerHTML = videolink;
-            // })
         </script>
     </body>
 </html>

@@ -30,6 +30,7 @@
         <button onclick="sendRequest()" >Send request</button>
         
         <p id="ipReq" ></p>
+        <p id="XMLHttp" ></p>
         <p id="error" ></p>
 
         <script>
@@ -50,7 +51,7 @@
                 const title = parsedUrl.searchParams.get('title');
                 const url = parsedUrl.searchParams.get('text');
 
-                const reqUrl = `${ip}/open-link-on-pc?title=${title}&url=${url}`;
+                const reqUrl = `http://${ip}/open-link-on-pc?title=${title}&url=${url}`;
 
                 console.log(reqUrl);
 
@@ -58,9 +59,15 @@
                 
 
                 try {
-                    let req = await fetch(reqUrl, {
-                        mode: 'no-cors'
-                    });
+                    const Http = new XMLHttpRequest();
+                    Http.open("GET", reqUrl);
+                    Http.send();
+
+                    Http.onreadystatechange = (e) => {
+                        console.log(Http.responseText)
+
+                        document.getElementById('XMLHttp').innerHTML = Http.responseText;
+                    }
                 }
                 catch (e) {
                     console.log(e);

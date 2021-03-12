@@ -13,4 +13,4 @@ Crosslink is a PWA that enables users to forward a link from their phones to the
 1. Visit https://pukmajster.github.io/crosslink and download the Crosslink PWA.
 2. On your PC, figure out your IPv4 address
 3. In the Crosslink app, enter the IPv4 address of your PC along with the port the API is running on (example: 192.168.0.xxx:3000) and click 'SAVE IP'
-5. That's it! You're now set up
+5. That's it, you're now fully set up!

@@ -9,6 +9,7 @@
         <link rel="icon" href="favicon.ico" type="image/x-icon" />
         <link rel="apple-touch-icon" href="images/icons/icon-192x192.png">
 
+        <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"> 
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="theme-color" content="white" />
         <meta name="apple-mobile-web-app-capable" content="yes">
@@ -26,7 +27,7 @@
         <h3>Crosslink 4</h3>
         <p id="query" ></p>
 
-        <input id="ip" value="192.168.0." />
+        <input id="ip" value="http://192.168.0." />
         <button onclick="sendRequest()" >Send request</button>
         
         <p id="ipReq" ></p>
@@ -51,7 +52,7 @@
                 const title = parsedUrl.searchParams.get('title');
                 const url = parsedUrl.searchParams.get('text');
 
-                const reqUrl = `http://${ip}/open-link-on-pc?title=${title}&url=${url}`;
+                const reqUrl = `${ip}/open-link-on-pc?title=${title}&url=${url}`;
 
                 document.getElementById('ipReq').innerHTML = reqUrl;
 

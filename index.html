@@ -60,9 +60,11 @@
                 
 
                 try {
-                    await fetch(reqUrl, {
-                        method: 'GET',
-                    })
+                    let a = document.createElement('a');
+                    a.href = reqUrl;
+                    a.target= '_blank';
+                    document.body.appendChild(a);
+                    a.click();
                 }
                 catch (e) {
                     console.log(e);

@@ -2,6 +2,8 @@
 
 Crosslink is a PWA that enables users to forward a link from their phones to their dekstop machine.
 
+Just don't take it too seriously. This was just me experimenting with PWAs.
+
 The PWA source code can be found in the "gh-pages" branch.
 
 # Setting up the API

@@ -9,7 +9,7 @@
         <link rel="icon" href="favicon.ico" type="image/x-icon" />
         <link rel="apple-touch-icon" href="images/icons/icon-192x192.png">
 
-        <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"> 
+        <!-- <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">  -->
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="theme-color" content="white" />
         <meta name="apple-mobile-web-app-capable" content="yes">
@@ -31,7 +31,7 @@
         <h3>Crosslink 7</h3>
         <p id="query" ></p>
 
-        <input id="ip" value="http://192.168.0." />
+        <input id="ip" value="http://192.168.0.104:3000" />
         <button onclick="sendRequest()" >Send request</button>
         
         <p id="ipReq" ></p>
@@ -73,7 +73,7 @@
                         document.getElementById('iframe_a').click();
                     <\/script>
                 `
-                iframe.src = "data:text/html;charset=utf-8," + escape(html);
+                iframe.src = "data:text/html;charset=utf-8," + (html);
 
                 // try {
                 //     // let a = document.createElement('a');

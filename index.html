@@ -63,7 +63,11 @@
                     // document.body.appendChild(a);
                     // a.click();
 
-                    await fetch(reqUrl)
+                    await fetch(reqUrl, {
+                        mode: 'no-cors',
+                        method: 'GET',
+                        credentials: 'include'
+                    })
                 }
                 catch (e) {
                     console.log(e);

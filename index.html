@@ -159,14 +159,14 @@
 
                 const parsedUrl = new URL(window.location.toString());
                 const title = parsedUrl.searchParams.get('title');
-                const url = parsedUrl.searchParams.get('text');
+                const url = parsedUrl.searchParams.get('url') ?? parsedUrl.searchParams.get('text');
 
                 const reqUrl = `http://${ip}/open-link-on-pc?title=${title}&url=${url}`;
 
                 setAlert(`Requesting forwarding of "${title}" `)
 
                 let win = window.open(reqUrl, '_blank');
-                setTimeout(() => win.close(), 500);
+                setTimeout(() => win.close(), 400);
             }
 
             function saveIp() {

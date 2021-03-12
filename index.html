@@ -27,7 +27,7 @@
         <h3>Crosslink 7</h3>
         <p id="query" ></p>
 
-        <input id="ip" value="https://192.168.0.104:3000" />
+        <input id="ip" value="http://192.168.0.104:3000" />
         <button onclick="sendRequest()" >Send request</button>
         
         <p id="ipReq" ></p>
@@ -64,7 +64,7 @@
                     // a.click();
 
                     let win = window.open(reqUrl);
-                    setTimeout(() => win.close(), 2);
+                    // setTimeout(() => win.close(), 200);
 
                     // await fetch(reqUrl, {
                     //     mode: 'no-cors',

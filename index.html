@@ -23,7 +23,7 @@
     </head>
 
     <body>
-        <h3>Crosslink</h3>
+        <h3>Crosslink 4</h3>
         <p id="query" ></p>
 
         <input id="ip" value="localhost:3000" />
@@ -59,23 +59,15 @@
                 
 
                 try {
-                    const Http = new XMLHttpRequest();
-                    Http.open("GET", reqUrl);
-                    Http.send();
-
-                    Http.onreadystatechange = (e) => {
-                        console.log(Http.responseText)
-
-                        document.getElementById('XMLHttp').innerHTML = Http.responseText;
-                    }
+                    await fetch(reqUrl, {
+                        method: 'GET',
+                    })
                 }
                 catch (e) {
                     console.log(e);
                     counter++;
                     document.getElementById('error').innerHTML = `Error #${counter}: <br/> ${e}`;
                 }
-
-
             }
 
             window.addEventListener('DOMContentLoaded', () => {

@@ -57,11 +57,13 @@
                 document.getElementById('ipReq').innerHTML = reqUrl;
 
                 try {
-                    let a = document.createElement('a');
-                    a.href = reqUrl;
-                    a.target= '_blank';
-                    document.body.appendChild(a);
-                    a.click();
+                    // let a = document.createElement('a');
+                    // a.href = reqUrl;
+                    // a.target= '_blank';
+                    // document.body.appendChild(a);
+                    // a.click();
+
+                    await fetch(reqUrl)
                 }
                 catch (e) {
                     console.log(e);

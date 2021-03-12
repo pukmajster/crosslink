@@ -20,11 +20,15 @@
             body {
                 font-size: 21px;
             }
+
+            iframe {
+                display: none;
+            }
         </style>
     </head>
 
     <body>
-        <h3>Crosslink 4</h3>
+        <h3>Crosslink 7</h3>
         <p id="query" ></p>
 
         <input id="ip" value="http://192.168.0." />
@@ -33,6 +37,10 @@
         <p id="ipReq" ></p>
         <p id="XMLHttp" ></p>
         <p id="error" ></p>
+
+        <div id="iframe_root" >
+            <iframe name="anchor_iframe"  id="anchor_iframe" ></iframe>
+        </div>
 
         <script>
             'use strict';
@@ -46,7 +54,7 @@
                 }
             }
 
-            async function sendRequest() {
+            function sendRequest() {
                 const parsedUrl = new URL(window.location.toString());
                 const ip = document.getElementById('ip').value;
                 const title = parsedUrl.searchParams.get('title');
@@ -56,20 +64,33 @@
 
                 document.getElementById('ipReq').innerHTML = reqUrl;
 
-                try {
-                    // let a = document.createElement('a');
-                    // a.href = reqUrl;
-                    // a.target= '_blank';
-                    // document.body.appendChild(a);
-                    // a.click();
+                let iframe = document.getElementById('anchor_iframe');
 
-                    await fetch(reqUrl)
-                }
-                catch (e) {
-                    console.log(e);
-                    counter++;
-                    document.getElementById('error').innerHTML = `Error #${counter}: <br/> ${e}`;
-                }
+                
+                let html = `
+                    <a id="iframe_a" href="${reqUrl}" >wd</a>
+                    <script>
+                        document.getElementById('iframe_a').click();
+                    <\/script>
+                `
+                iframe.src = "data:text/html;charset=utf-8," + escape(html);
+
+                // try {
+                //     // let a = document.createElement('a');
+                //     // a.href = reqUrl;
+                //     // a.target= '_blank';
+                //     // document.body.appendChild(a);
+                //     // a.click();
+
+                    
+
+                //     // await fetch(reqUrl)
+                // }
+                // catch (e) {
+                //     console.log(e);
+                //     counter++;
+                //     document.getElementById('error').innerHTML = `Error #${counter}: <br/> ${e}`;
+                // }
             }
 
             window.addEventListener('DOMContentLoaded', () => {

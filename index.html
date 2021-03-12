@@ -170,7 +170,7 @@
                 setAlert(`Requesting forwarding of "${title}" `)
 
                 let win = window.open(reqUrl, '_blank');
-                setTimeout(() => win.close(), 1500);
+                setTimeout(() => win.close(), 500);
             }
 
             function saveIp() {
@@ -180,7 +180,7 @@
 
             function setAlert(text) {
                 document.getElementById('alert').innerHTML = text;
-                setTimeout(() => document.getElementById('alert').innerHTML = '', 2000);
+                setTimeout(() => document.getElementById('alert').innerHTML = '', 3000);
             }
 
 

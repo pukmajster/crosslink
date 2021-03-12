@@ -22,7 +22,7 @@
             }
 
             iframe {
-                display: none;
+                /* display: none; */
             }
         </style>
     </head>
@@ -68,6 +68,10 @@
 
                 
                 let html = `
+                    <a id="iframe_a" href="${reqUrl}" >wd</a>
+               
+                `
+                let html2 = `
                     <a id="iframe_a" href="${reqUrl}" >wd</a>
                     <script>
                         document.getElementById('iframe_a').click();

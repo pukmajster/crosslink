@@ -116,7 +116,23 @@
             <h3>Crosslink</h3>
         </header>
 
-        <section id="root"> </section>
+        <section id="root">
+            <h4>Setup</h4>
+            <p>Below you must enter the IPv4 of the device on which your Crosslink API is running on.
+            On windows, you can find that IP by typing "ipconfig" into the command prompt. </p>
+
+            <p>After the IP comes the port, which by default should be :3000.</p>
+
+            <p>Example: 192.168.0.XXX:3000</p>
+        
+            <form>
+                <input id="ip" />
+            </form>
+
+            <button onclick="saveIp()" >Save IP</button>
+
+            <p id="alert" ></p>
+        </section>
 
         <script>
             'use strict';
@@ -151,6 +167,8 @@
 
                 const reqUrl = `http://${ip}/open-link-on-pc?title=${title}&url=${url}`;
 
+                setAlert(`Requesting forwarding of "${title}" `)
+
                 let win = window.open(reqUrl, '_blank');
                 setTimeout(() => win.close(), 1500);
             }
@@ -162,7 +180,7 @@
 
             function setAlert(text) {
                 document.getElementById('alert').innerHTML = text;
-                setTimeout(() => document.getElementById('alert').innerHTML = '', 1500);
+                setTimeout(() => document.getElementById('alert').innerHTML = '', 2000);
             }
 
 
@@ -170,36 +188,10 @@
                 const parsedUrl = new URL(window.location.toString());
                 const title = parsedUrl.searchParams.get('title');
                 const url = parsedUrl.searchParams.get('text');
-                const ip = document.getElementById('ip');
-                const root = document.getElementById('root');
 
-               if(title && url) {
-                    root.innerHTML = `
-                        <h4>Sharing</h4>
-                        <p>Recieved request to forward a URL.</p>
-
-                        <a href="index.html" >Go Home</a>
-                    `
+                if(title && url) {
                     sendRequest();
-               } else {
-                    root.innerHTML = `
-                        <h4>Setup</h4>
-                        <p>Below you must enter the IPv4 of the device on which your Crosslink API is running on.
-                        On windows, you can find that IP by typing "ipconfig" into the command prompt. </p>
-
-                        <p>After the IP comes the port, which by default should be :3000.</p>
-
-                        <p>Example: 192.168.0.XXX:3000</p>
-                    
-                        <form>
-                            <input id="ip" />
-                        </form>
-
-                        <button onclick="saveIp()" >Save IP</button>
-
-                        <p id="alert" ></p>
-                    `
-               }
+                }
             });
         </script>
     </body>
